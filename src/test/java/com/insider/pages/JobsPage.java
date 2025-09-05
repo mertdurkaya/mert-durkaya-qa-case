@@ -16,12 +16,14 @@ public class JobsPage extends BasePage {
     }
 
     // --- Locators ---
-    @FindBy(id = "filter-by-location")
+    @FindBy(id = "select2-filter-by-location-container")
     private WebElement locationFilter;
 
     // This locator finds the specific option after the dropdown is opened
     private By locationOptionByText(String location) {
-        return By.xpath("//li[text()='" + location + "']");
+        // return By.id("select2-filter-by-location-result-kpap-" + location);
+        // #select2-filter-by-location-result-kpap-Istanbul\,\ Turkiye
+        return By.xpath("//li[contains(@id, 'select2-filter-by-location-result') and text()='" + location + "']");
     }
 
     @FindBy(id = "jobs-list")
@@ -49,7 +51,9 @@ public class JobsPage extends BasePage {
 
     public void clickFirstViewRoleButton() {
         // Find the first "View Role" button in the list and click it
-        WebElement firstViewRoleButton = Helper.waitForClickability(jobItems.get(0).findElement(By.linkText("View Role")), 10);
-        firstViewRoleButton.click();
+        WebElement firstJobItem = jobItems.get(0);
+        Helper.hoverOverElement(firstJobItem, driver); // Ensure hover to reveal the button
+        WebElement firstViewRoleButton = Helper.waitForClickability(firstJobItem.findElement(By.linkText("View Role")), 10);
+        Helper.safeClick(firstViewRoleButton, 10);
     }
 }

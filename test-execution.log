@@ -1,0 +1,20 @@
+2025-09-05 16:15:40 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
+  Command line suite
+
+2025-09-05 16:15:48 [main] INFO  com.insider.tests.CareerTest - Setting up test environment
+2025-09-05 16:15:51 [main] INFO  i.g.bonigarcia.wdm.WebDriverManager - Using chromedriver 140.0.7339.80 (resolved driver for Chrome 140)
+2025-09-05 16:15:51 [main] INFO  i.g.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as /Users/mertdurkaya/.cache/selenium/chromedriver/mac-arm64/140.0.7339.80/chromedriver
+2025-09-05 16:15:52 [main] INFO  com.insider.tests.CareerTest - Starting Insider career application flow test
+2025-09-05 16:16:02 [main] INFO  com.insider.pages.HomePage - Navigating to page: https://useinsider.com/
+2025-09-05 16:16:10 [main] INFO  com.insider.tests.CareerTest - Accepting cookies and navigating to careers page
+2025-09-05 16:16:12 [main] INFO  com.insider.pages.HomePage - Accepting cookies
+2025-09-05 16:16:17 [main] INFO  com.insider.pages.HomePage - Clicking company menu
+2025-09-05 16:16:22 [main] INFO  com.insider.pages.HomePage - Clicking careers link
+2025-09-05 16:20:49 [main] INFO  com.insider.pages.HomePage - Navigating to page: https://useinsider.com/careers/quality-assurance/
+2025-09-05 16:20:53 [main] WARN  com.insider.utils.Helper - Element click was intercepted, attempting JavaScript click
+2025-09-05 16:20:56 [main] INFO  com.insider.tests.CareerTest - Filtering jobs by location: Istanbul, Turkiye
+2025-09-05 16:21:05 [main] INFO  com.insider.tests.CareerTest - Verifying job listings...
+2025-09-05 16:21:18 [main] INFO  com.insider.tests.CareerTest - Clicking view role button and switching to new window
+2025-09-05 16:21:21 [main] WARN  com.insider.utils.Helper - Element click was intercepted, attempting JavaScript click
+2025-09-05 16:22:12 [main] INFO  com.insider.tests.CareerTest - Test completed successfully
+2025-09-05 16:22:14 [main] INFO  com.insider.tests.CareerTest - Cleaning up test environment
