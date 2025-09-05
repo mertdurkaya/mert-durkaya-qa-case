@@ -8,7 +8,7 @@ public class Constants {
     
     // Timeouts
     public static final int DEFAULT_TIMEOUT = 10;
-    public static final int EXTENDED_TIMEOUT = 15;
+    public static final int EXTENDED_TIMEOUT = 30;
     
     // Test Data
     public static final String TEST_LOCATION = "Istanbul, Turkiye";

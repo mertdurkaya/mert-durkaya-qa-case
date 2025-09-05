@@ -41,5 +41,6 @@ public class CareersPage extends BasePage {
 
     public void clickSeeAllQAJobsButton() {
         Helper.safeClick(seeAllQAJobsButton, 15);
+        Helper.waitForPageLoad(15);
     }
 }
