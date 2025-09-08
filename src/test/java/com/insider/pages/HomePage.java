@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.insider.config.ConfigManager;
 import com.insider.utils.Helper;
-import com.insider.utils.Constants;
 
 public class HomePage extends BasePage {
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
@@ -31,29 +31,29 @@ public class HomePage extends BasePage {
 
     public void goToHomePage() {
         logger.info("Navigating to home page");
-        driver.get(Constants.BASE_URL);
-        Helper.waitForPageLoad(Constants.DEFAULT_TIMEOUT);
+        driver.get(ConfigManager.getBaseUrl());
+        Helper.waitForPageLoad();
     }
 
     public void goToPage(String path) {
         logger.info("Navigating to page: {}", path);
         driver.get(path);
-        Helper.waitForPageLoad(Constants.DEFAULT_TIMEOUT);
+        Helper.waitForPageLoad();
     }
 
     public void acceptCookies() {
         logger.info("Accepting cookies");
-        Helper.safeClick(acceptCookiesButton, Constants.DEFAULT_TIMEOUT);
+        Helper.safeClick(acceptCookiesButton, ConfigManager.getDefaultTimeout());
     }
 
     public void clickCompanyMenu() {
         logger.info("Clicking company menu");
-        Helper.safeClick(companyMenu, Constants.DEFAULT_TIMEOUT);
+        Helper.safeClick(companyMenu, ConfigManager.getDefaultTimeout());
     }
 
     public void clickCareersLink() {
         logger.info("Clicking careers link");
-        Helper.safeClick(careersLink, Constants.DEFAULT_TIMEOUT);
-        Helper.waitForPageLoad(Constants.DEFAULT_TIMEOUT);
+        Helper.safeClick(careersLink, ConfigManager.getDefaultTimeout());
+        Helper.waitForPageLoad();
     }
 }

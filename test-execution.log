@@ -1,20 +1,42 @@
-2025-09-05 16:15:40 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
-  Command line suite
-
-2025-09-05 16:15:48 [main] INFO  com.insider.tests.CareerTest - Setting up test environment
-2025-09-05 16:15:51 [main] INFO  i.g.bonigarcia.wdm.WebDriverManager - Using chromedriver 140.0.7339.80 (resolved driver for Chrome 140)
-2025-09-05 16:15:51 [main] INFO  i.g.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as /Users/mertdurkaya/.cache/selenium/chromedriver/mac-arm64/140.0.7339.80/chromedriver
-2025-09-05 16:15:52 [main] INFO  com.insider.tests.CareerTest - Starting Insider career application flow test
-2025-09-05 16:16:02 [main] INFO  com.insider.pages.HomePage - Navigating to page: https://useinsider.com/
-2025-09-05 16:16:10 [main] INFO  com.insider.tests.CareerTest - Accepting cookies and navigating to careers page
-2025-09-05 16:16:12 [main] INFO  com.insider.pages.HomePage - Accepting cookies
-2025-09-05 16:16:17 [main] INFO  com.insider.pages.HomePage - Clicking company menu
-2025-09-05 16:16:22 [main] INFO  com.insider.pages.HomePage - Clicking careers link
-2025-09-05 16:20:49 [main] INFO  com.insider.pages.HomePage - Navigating to page: https://useinsider.com/careers/quality-assurance/
-2025-09-05 16:20:53 [main] WARN  com.insider.utils.Helper - Element click was intercepted, attempting JavaScript click
-2025-09-05 16:20:56 [main] INFO  com.insider.tests.CareerTest - Filtering jobs by location: Istanbul, Turkiye
-2025-09-05 16:21:05 [main] INFO  com.insider.tests.CareerTest - Verifying job listings...
-2025-09-05 16:21:18 [main] INFO  com.insider.tests.CareerTest - Clicking view role button and switching to new window
-2025-09-05 16:21:21 [main] WARN  com.insider.utils.Helper - Element click was intercepted, attempting JavaScript click
-2025-09-05 16:22:12 [main] INFO  com.insider.tests.CareerTest - Test completed successfully
-2025-09-05 16:22:14 [main] INFO  com.insider.tests.CareerTest - Cleaning up test environment
+2025-09-08 16:29:04 [main] INFO  com.insider.reporting.ReportManager - ExtentReports initialized successfully. Report will be generated at: test-output/reports/ExtentReport_20250908_162904.html
+2025-09-08 16:29:04 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Setting up test environment
+2025-09-08 16:29:04 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.driver.DriverManager - Setting up chrome browser (headless: false)
+2025-09-08 16:29:04 [TestNG-test-Career Application Flow Test-1] INFO  i.g.bonigarcia.wdm.WebDriverManager - Using chromedriver 140.0.7339.80 (resolved driver for Chrome 140)
+2025-09-08 16:29:04 [TestNG-test-Career Application Flow Test-1] INFO  i.g.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as /Users/mertdurkaya/.cache/selenium/chromedriver/mac-arm64/140.0.7339.80/chromedriver
+2025-09-08 16:29:05 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.driver.DriverManager - Driver setup completed successfully
+2025-09-08 16:29:05 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Test data initialized: TestData{location='Istanbul, Turkiye', department='Quality Assurance', expectedRedirectDomain='lever.co'}
+2025-09-08 16:29:05 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Created test: testInsiderCareerApplicationFlow - Test the complete career application flow from home page to job application
+2025-09-08 16:29:05 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Starting test: testInsiderCareerApplicationFlow
+2025-09-08 16:29:05 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Starting Insider career application flow test
+2025-09-08 16:29:05 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Starting Insider career application flow test
+2025-09-08 16:29:05 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.pages.HomePage - Navigating to page: https://useinsider.com/
+2025-09-08 16:29:06 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Successfully navigated to home page: https://useinsider.com/
+2025-09-08 16:29:06 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Accepting cookies and navigating to careers page
+2025-09-08 16:29:06 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Accepting cookies and navigating to careers page
+2025-09-08 16:29:06 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.pages.HomePage - Accepting cookies
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Navigating to careers page via company menu
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.pages.HomePage - Clicking company menu
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.pages.HomePage - Clicking careers link
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Locations block is displayed
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Teams block is displayed
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Life at Insider block is displayed
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Navigating to QA careers page
+2025-09-08 16:29:07 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.pages.HomePage - Navigating to page: https://useinsider.com/careers/quality-assurance/
+2025-09-08 16:29:09 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Filtering jobs by location: Istanbul, Turkiye
+2025-09-08 16:29:09 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Filtering jobs by location: Istanbul, Turkiye
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Jobs list is present after filtering
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Found 2 jobs in the list
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Verifying job listings...
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Verifying job listings for correct department and location
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Job 1 validation passed - Position: Senior Software Quality Assurance Engineer, Department: Quality Assurance, Location: Istanbul, Turkiye
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Job 2 validation passed - Position: Software Quality Assurance Engineer, Department: Quality Assurance, Location: Istanbul, Turkiye
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Clicking view role button and switching to new window
+2025-09-08 16:29:18 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Clicking view role button and switching to new window
+2025-09-08 16:29:28 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Successfully redirected to: https://jobs.lever.co/useinsider/78ddbec0-16bf-4eab-b5a6-04facb993ddc
+2025-09-08 16:29:28 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Test completed successfully
+2025-09-08 16:29:28 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Test completed successfully
+2025-09-08 16:29:28 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - PASS: Test passed: testInsiderCareerApplicationFlow
+2025-09-08 16:29:28 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.tests.CareerTest - Cleaning up test environment
+2025-09-08 16:29:28 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.reporting.ReportManager - Cleaning up test environment
+2025-09-08 16:29:28 [TestNG-test-Career Application Flow Test-1] INFO  com.insider.driver.DriverManager - Tearing down driver
+2025-09-08 16:29:28 [main] INFO  com.insider.reporting.ReportManager - ExtentReports closed successfully

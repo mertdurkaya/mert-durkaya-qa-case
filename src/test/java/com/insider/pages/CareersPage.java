@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.insider.config.ConfigManager;
 import com.insider.utils.Helper;
 
 public class CareersPage extends BasePage {
@@ -28,7 +29,7 @@ public class CareersPage extends BasePage {
     // --- Page Actions ---
     public boolean isLocationsBlockDisplayed() {
         // We'll use this method for our assertion later
-        return Helper.waitForVisibility(locationsBlock, 10).isDisplayed();
+        return Helper.waitForVisibility(locationsBlock, ConfigManager.getDefaultTimeout()).isDisplayed();
     }
 
     public boolean isTeamsBlockDisplayed() {
@@ -40,7 +41,8 @@ public class CareersPage extends BasePage {
     }
 
     public void clickSeeAllQAJobsButton() {
-        Helper.safeClick(seeAllQAJobsButton, 15);
-        Helper.waitForPageLoad(15);
+        Helper.safeClick(seeAllQAJobsButton, ConfigManager.getExtendedTimeout());
+        // wait here until filter is applied and jobs are loaded
+        Helper.waitForPageLoad();
     }
 }

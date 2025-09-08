@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Insider QA Test Suite" parallel="tests" thread-count="1">
-    <test name="Career Application Flow Test">
+<suite name="Insider QA Test Suite" parallel="methods" thread-count="3" verbose="1">
+    <listeners>
+        <listener class-name="com.insider.listeners.TestListener"/>
+    </listeners>
+    
+    <test name="Career Application Flow Test" preserve-order="false">
         <classes>
             <class name="com.insider.tests.CareerTest"/>
         </classes>
