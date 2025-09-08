@@ -238,6 +238,23 @@ public class Helper {
         }
     }
     
+    /**
+     * Waits for an element to disappear from the DOM.
+     * 
+     * @param element the WebElement to wait for disappearance
+     * @param timeoutInSeconds maximum time to wait in seconds
+     * @return true if element disappeared, false if timeout
+     */
+    public static boolean waitForElementToDisappear(WebElement element, int timeoutInSeconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeoutInSeconds));
+            return wait.until(ExpectedConditions.stalenessOf(element));
+        } catch (Exception e) {
+            logger.debug("Element did not disappear within {} seconds", timeoutInSeconds);
+            return false;
+        }
+    }
+    
     // Wait for specific element count to be stable (useful for dynamic lists)
     public static void waitForElementCountToBeStable(By locator, int expectedCount, int timeoutInSeconds) {
         try {
@@ -260,6 +277,101 @@ public class Helper {
             logger.debug("Element count stabilized at: {}", expectedCount);
         } catch (Exception e) {
             logger.warn("Element count stabilization failed: {}", e.getMessage());
+        }
+    }
+    
+    /**
+     * Finds an element using multiple locator strategies with optimized retry logic.
+     * This is useful for elements that might have different selectors.
+     * 
+     * @param locators array of By locators to try
+     * @param totalTimeoutInSeconds total timeout for all attempts combined
+     * @return the first found WebElement
+     * @throws ElementNotFoundException if no element is found with any locator
+     */
+    public static WebElement findElementWithMultipleStrategies(By[] locators, int totalTimeoutInSeconds) {
+        int individualTimeout = Math.max(5, totalTimeoutInSeconds / locators.length); // At least 5 seconds per locator
+        
+        for (int i = 0; i < locators.length; i++) {
+            By locator = locators[i];
+            try {
+                logger.debug("Trying locator {} of {}: {}", i + 1, locators.length, locator);
+                
+                // Use shorter timeout for individual attempts
+                WebElement element = waitForElementWithRetry(locator, individualTimeout);
+                if (element != null) {
+                    logger.debug("Element found with locator: {}", locator);
+                    return element;
+                }
+            } catch (Exception e) {
+                logger.debug("Locator {} failed: {}", locator, e.getMessage());
+                // Continue to next locator immediately
+            }
+        }
+        throw new ElementNotFoundException("Element not found with any of the provided locators");
+    }
+    
+    /**
+     * Fast element finder that tries multiple strategies with minimal delays.
+     * Uses shorter timeouts for quick failure and retry.
+     * 
+     * @param locators array of By locators to try
+     * @return the first found WebElement
+     * @throws ElementNotFoundException if no element is found with any locator
+     */
+    public static WebElement findElementFast(By[] locators) {
+        for (By locator : locators) {
+            try {
+                logger.debug("Fast trying locator: {}", locator);
+                WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(3));
+                WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                if (element != null) {
+                    logger.debug("Element found quickly with locator: {}", locator);
+                    return element;
+                }
+            } catch (Exception e) {
+                logger.debug("Fast locator {} failed: {}", locator, e.getMessage());
+                // Continue immediately to next locator
+            }
+        }
+        throw new ElementNotFoundException("Element not found with any of the provided locators");
+    }
+    
+    /**
+     * Waits for page to be in a stable state (no ongoing animations, AJAX requests, etc.)
+     * 
+     * @param timeoutInSeconds maximum time to wait
+     */
+    public static void waitForPageStability(int timeoutInSeconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeoutInSeconds));
+            wait.until(webDriver -> {
+                // Check if page is loaded
+                String readyState = (String) ((JavascriptExecutor) webDriver)
+                    .executeScript("return document.readyState");
+                if (!"complete".equals(readyState)) {
+                    return false;
+                }
+                
+                // Check if jQuery is active (if present)
+                Boolean jqueryActive = (Boolean) ((JavascriptExecutor) webDriver)
+                    .executeScript("return typeof jQuery !== 'undefined' ? jQuery.active === 0 : true;");
+                if (!jqueryActive) {
+                    return false;
+                }
+                
+                // Check if there are any ongoing animations
+                Boolean animationsComplete = (Boolean) ((JavascriptExecutor) webDriver)
+                    .executeScript("return !document.querySelectorAll('*').length || " +
+                        "Array.from(document.querySelectorAll('*')).every(el => " +
+                        "getComputedStyle(el).transitionDuration === '0s' && " +
+                        "getComputedStyle(el).animationDuration === '0s');");
+                
+                return animationsComplete;
+            });
+            logger.debug("Page reached stable state");
+        } catch (Exception e) {
+            logger.debug("Page stability check failed, continuing...");
         }
     }
 }

@@ -20,11 +20,13 @@ public class HomePage extends BasePage {
     @FindBy(id = "wt-cli-accept-all-btn")
     private WebElement acceptCookiesButton;
 
+    // More robust selectors for Company menu
     @FindBy(xpath = "//a[contains(text(),'Company')]")
     private WebElement companyMenu;
 
     @FindBy(xpath = "//a[contains(text(),'Careers')]")
     private WebElement careersLink;
+    
 
 
     // --- Page Actions ---
@@ -43,17 +45,91 @@ public class HomePage extends BasePage {
 
     public void acceptCookies() {
         logger.info("Accepting cookies");
-        Helper.safeClick(acceptCookiesButton, ConfigManager.getDefaultTimeout());
+        try {
+            // Wait for cookie banner to be present and clickable
+            Helper.waitForVisibility(acceptCookiesButton, ConfigManager.getExtendedTimeout());
+            Helper.safeClick(acceptCookiesButton, ConfigManager.getExtendedTimeout());
+            
+            // Wait for cookie banner to disappear
+            Helper.waitForElementToDisappear(acceptCookiesButton, ConfigManager.getDefaultTimeout());
+            logger.info("Cookies accepted successfully");
+        } catch (Exception e) {
+            logger.warn("Cookie acceptance failed or not needed: {}", e.getMessage());
+            // Continue execution as cookie banner might not be present
+        }
     }
 
     public void clickCompanyMenu() {
         logger.info("Clicking company menu");
-        Helper.safeClick(companyMenu, ConfigManager.getDefaultTimeout());
+        
+        // Define optimized locator strategies (most likely first)
+        org.openqa.selenium.By[] companyLocators = {
+            org.openqa.selenium.By.xpath("//a[contains(text(),'Company')]"),
+            org.openqa.selenium.By.xpath("//nav//a[contains(text(),'Company')]"),
+            org.openqa.selenium.By.xpath("//header//a[contains(text(),'Company')]")
+        };
+        
+        try {
+            // Try fast method first
+            WebElement companyElement = Helper.findElementFast(companyLocators);
+            
+            Helper.safeClick(companyElement, ConfigManager.getDefaultTimeout());
+            logger.info("Company menu clicked successfully");
+            
+        } catch (Exception e) {
+            logger.warn("Fast method failed, trying with extended timeout: {}", e.getMessage());
+            try {
+                // Fallback to extended method if fast method fails
+                WebElement companyElement = Helper.findElementWithMultipleStrategies(
+                    companyLocators, 
+                    ConfigManager.getDefaultTimeout()
+                );
+                
+                Helper.safeClick(companyElement, ConfigManager.getDefaultTimeout());
+                logger.info("Company menu clicked successfully with fallback method");
+                
+            } catch (Exception fallbackException) {
+                logger.error("Failed to click company menu: {}", fallbackException.getMessage());
+                throw new RuntimeException("Failed to click company menu: " + fallbackException.getMessage(), fallbackException);
+            }
+        }
     }
 
     public void clickCareersLink() {
         logger.info("Clicking careers link");
-        Helper.safeClick(careersLink, ConfigManager.getDefaultTimeout());
-        Helper.waitForPageLoad();
+        
+        // Define optimized locator strategies for careers link (most likely first)
+        org.openqa.selenium.By[] careersLocators = {
+            org.openqa.selenium.By.xpath("//a[contains(text(),'Careers')]"),
+            org.openqa.selenium.By.xpath("//nav//a[contains(text(),'Careers')]"),
+            org.openqa.selenium.By.xpath("//header//a[contains(text(),'Careers')]")
+        };
+        
+        try {
+            // Try fast method first
+            WebElement careersElement = Helper.findElementFast(careersLocators);
+            
+            Helper.safeClick(careersElement, ConfigManager.getDefaultTimeout());
+            Helper.waitForPageLoad();
+            logger.info("Careers link clicked successfully");
+            
+        } catch (Exception e) {
+            logger.warn("Fast method failed, trying with extended timeout: {}", e.getMessage());
+            try {
+                // Fallback to extended method if fast method fails
+                WebElement careersElement = Helper.findElementWithMultipleStrategies(
+                    careersLocators, 
+                    ConfigManager.getDefaultTimeout()
+                );
+                
+                Helper.safeClick(careersElement, ConfigManager.getDefaultTimeout());
+                Helper.waitForPageLoad();
+                logger.info("Careers link clicked successfully with fallback method");
+                
+            } catch (Exception fallbackException) {
+                logger.error("Failed to click careers link: {}", fallbackException.getMessage());
+                throw new RuntimeException("Failed to click careers link: " + fallbackException.getMessage(), fallbackException);
+            }
+        }
     }
 }

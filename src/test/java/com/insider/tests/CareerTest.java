@@ -59,11 +59,24 @@ public class CareerTest {
             
             logger.info("Accepting cookies and navigating to careers page");
             ReportManager.logInfo("Accepting cookies and navigating to careers page");
+            
+            // Wait for page to be fully loaded before accepting cookies
+            // Helper.waitForPageLoad();
+            // Helper.sleep(2); // Additional wait for dynamic content
+            
             homePage.acceptCookies();
+            
+            // Wait for any overlays or popups to disappear
+            // Helper.sleep(3);
+            // Helper.waitForPageLoad();
 
             // Select the "Company" menu in the navigation bar, select "Careers" and check Career page, its Locations, Teams, and Life at Insider blocks are open or not
             ReportManager.logInfo("Navigating to careers page via company menu");
             homePage.clickCompanyMenu();
+            
+            // Wait for menu to expand
+            // Helper.sleep(2);
+            
             homePage.clickCareersLink();
 
             CareersPage careersPage = new CareersPage(DriverManager.getDriver());

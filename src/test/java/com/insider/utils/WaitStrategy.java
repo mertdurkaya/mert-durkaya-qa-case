@@ -25,16 +25,20 @@ public class WaitStrategy {
     /**
      * Wait for element to be present and visible with retry logic
      */
-    public static WebElement waitForElementWithRetry(By locator, int maxRetries) {
+    public static WebElement waitForElementWithRetry(By locator, int timeoutInSeconds) {
+        int maxRetries = 2; // Reduced retries for faster execution
+        int individualTimeout = Math.max(3, timeoutInSeconds / maxRetries); // Shorter individual timeouts
+        
         for (int i = 0; i < maxRetries; i++) {
             try {
-                WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(5));
+                WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(individualTimeout));
                 return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             } catch (Exception e) {
                 if (i == maxRetries - 1) {
                     throw new ElementNotFoundException("Element not found after " + maxRetries + " retries: " + locator, e);
                 }
-                Helper.sleep(1);
+                logger.debug("Attempt {} failed for locator {}, retrying...", i + 1, locator);
+                Helper.sleep(1); // Shorter wait between retries
             }
         }
         return null;
